@@ -39,12 +39,18 @@ public class InventoryCleaner {
                 }
 
                 if (data != null && data.length> 1){
+                    String partCode = getField(data[0], "Part code");
+                    String name = getField(data[1], "Name");
+                    String brand = getField(data[2], "Brand");
                     String price = data[3];
-
                     String cleanPrice = price.replace("Rs.","")
                             .replace("rs", "")
                             .replace("Rs","")
                             .trim();
+                    String quantity = getField(data[4], "Quantity");
+                    String category = getField(data[5],"Category");
+                    String dateAdded = getField(data[6], "Date added");
+                    String imageFile = getField(data[7], "Image file");
                 }
 
             }
