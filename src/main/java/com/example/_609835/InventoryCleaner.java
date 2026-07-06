@@ -1,8 +1,5 @@
 package com.example._609835;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 
 public class InventoryCleaner {
@@ -47,11 +44,24 @@ public class InventoryCleaner {
                             .replace("rs", "")
                             .replace("Rs","")
                             .trim();
-                    String quantity = getField(data[4], "Quantity");
+                    double priceValue = 0.0;
+                    if (!cleanPrice.isEmpty()){
+                        priceValue = Double.parseDouble(cleanPrice);
+                    }
+                    String quantityStr = getField(data[4], "Quantity");
+                    int quantity = 0;
+                    if (!quantityStr.startsWith("No")){
+                        quantity = Integer.parseInt(quantityStr);
+                    }
                     String category = getField(data[5],"Category");
                     String dateAdded = getField(data[6], "Date added");
                     String imageFile = getField(data[7], "Image file");
+                    Part part = new Part(partCode, name, brand, priceValue, quantity, category, dateAdded, imageFile);
+                    System.out.println("Parsed: " + part.getPartCode() + " - " + part.getName());
+
                 }
+
+
 
             }
         } catch (IOException e){
