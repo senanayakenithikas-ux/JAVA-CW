@@ -10,6 +10,16 @@ public class InventoryCleaner {
         }
         return value.trim();
     }
+
+    private static int countChar(String str, char ch){
+        int count = 0;
+        for (int i =0; i < str.length(); i++){
+            if (str.charAt(i) == ch){
+                count++;
+            }
+        }
+        return count;
+    }
     public static void main (String[] args){
         String file = "inventory_legacy.txt";
 
@@ -23,15 +33,21 @@ public class InventoryCleaner {
                 if(line.trim().isEmpty()){
                     continue;
                 }
+
+                int commaCount = countChar(line, ',');
+                int pipeCount = countChar(line, '|');
+                int semiCount = countChar(line, ';');
+
                 String [] data = null;
 
-                if(line.contains("|")){
+                if (pipeCount > semiCount && pipeCount > commaCount){
                     data = line.split("\\|");
-                } else if (line.contains(";")) {
+                } else if (semiCount > pipeCount && semiCount > commaCount){
                     data = line.split(";");
-                }else if (line.contains(",")){
+                } else if (commaCount > pipeCount && commaCount > semiCount){
                     data = line.split(",");
                 } else {
+                    System.out.println("Skipped delimiter: " + line.trim());
                     continue;
                 }
 
