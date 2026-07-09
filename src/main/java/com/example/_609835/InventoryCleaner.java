@@ -41,17 +41,20 @@ public class InventoryCleaner {
                 String [] data = null;
 
                 if (pipeCount > semiCount && pipeCount > commaCount){
+                    line = line.replace(";","|").replace(",","|");
                     data = line.split("\\|");
                 } else if (semiCount > pipeCount && semiCount > commaCount){
+                    line = line.replace("|",";").replace(",",";");
                     data = line.split(";");
                 } else if (commaCount > pipeCount && commaCount > semiCount){
+                    line = line.replace("|",",").replace(";",",");
                     data = line.split(",");
                 } else {
                     System.out.println("Skipped delimiter: " + line.trim());
                     continue;
                 }
 
-                if (data != null && data.length> 1){
+                if (data != null && data.length>= 7){
                     String partCode = getField(data[0], "Part code");
                     String name = getField(data[1], "Name");
                     String brand = getField(data[2], "Brand");
@@ -69,9 +72,10 @@ public class InventoryCleaner {
                     if (!quantityStr.startsWith("No")){
                         quantity = Integer.parseInt(quantityStr);
                     }
-                    String category = getField(data[5],"Category");
+                    String rawCategory = getField(data[5],"Category");
+                    String category = rawCategory.substring(0,1).toUpperCase() + rawCategory.substring(1).toLowerCase();
                     String dateAdded = getField(data[6], "Date added");
-                    String imageFile = getField(data[7], "Image file");
+                    String imageFile = data.length > 7 ? getField(data[7], "Image file") : "No Image";
                     Part part = new Part(partCode, name, brand, priceValue, quantity, category, dateAdded, imageFile);
                     System.out.println("Parsed: " + part.getPartCode() + " - " + part.getName());
 
@@ -84,7 +88,9 @@ public class InventoryCleaner {
             System.out.println("An error occurred while reading the file " + file);
         }
 
+
     }
+
 
 
 }
