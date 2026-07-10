@@ -1,0 +1,10 @@
+P001,Bajaj 4-Stroke Piston,Bajaj,4500.0,15,Engine,12-10-2023,piston4s.jpg
+P002,TVS King Brake Pad,TVS,1250.0,8,Brakes,12-05-2023,brakepad.png
+P003,205/50-10 Tyre,No Brand,6500.0,24,Bodywork,15-10-2023,No Image file
+P004,Spark Plug NGK,NGK,850.0,50,Electrical,05-01-2024,spark.jpg
+P005,Clutch Cable Bajaj RE,Bajaj,950.0,12,Engine,01-02-2024,cl_cable.jpg
+P006,Headlight Bulb 12V,No Brand,450.0,30,Electrical,20-11-2023,hl_bulb.jpg
+P007,3-Wheeler Canopy Cover,Local,8500.5,5,Bodywork,15-08-2023,canopy.png
+P008,Piaggio Ape Filter,Piaggio,1100.0,0,Engine,28-02-2024,filter_ape.jpeg
+P009,Ignition Coil 2-Stroke,Bajaj,2200.0,18,Electrical,01-09-2023,No Image
+P010,Rear View Mirror,No Brand,800.0,45,Bodywork,10-10-2023,mirror.png

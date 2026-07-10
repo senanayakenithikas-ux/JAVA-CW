@@ -1,8 +1,25 @@
 package com.example._609835;
 import java.io.*;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.util.Locale;
 
 
 public class InventoryCleaner {
+
+    private static final DateTimeFormatter[] dateFormatters = {
+            new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("dd/MM/yyyy").toFormatter(),
+            new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("yyyy-MM-dd").toFormatter(),
+            new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("dd-MM-yyyy").toFormatter(),
+            new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("yyyy/MM/dd").toFormatter(),
+            new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("MMM dd, yyyy").toFormatter(Locale.ENGLISH),
+            new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("dd-MMM-yyyy").toFormatter(Locale.ENGLISH),
+            new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("MMM dd yyyy").toFormatter(Locale.ENGLISH),
+    };
+
+    private static final DateTimeFormatter targetFormatters = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     private static String getField(String value, String fieldName){
         if (value.trim().isEmpty()){
@@ -20,12 +37,33 @@ public class InventoryCleaner {
         }
         return count;
     }
+
+    private static String normalizeDate(String rawDate){
+        if (rawDate == null || rawDate.trim().isEmpty() || rawDate.startsWith("No")){
+            return rawDate;
+        }
+        String cleanedDate = rawDate.trim();
+
+        for (DateTimeFormatter formatter : dateFormatters){
+            try {
+                LocalDate date = LocalDate.parse(cleanedDate, formatter);
+                return date.format(targetFormatters);
+            }catch (DateTimeException ignored){
+
+            }
+        }
+        return rawDate;
+    }
+
     public static void main (String[] args){
         String file = "inventory_legacy.txt";
+        String outFile = "inventory_clean.txt";
 
 
         try (FileReader filereader = new FileReader(file);
-             BufferedReader bufferedReader = new BufferedReader(filereader)) {
+             BufferedReader bufferedReader = new BufferedReader(filereader);
+             FileWriter fileWriter = new FileWriter(outFile);
+             PrintWriter printWriter = new PrintWriter(fileWriter)){
 
             String line;
 
@@ -33,6 +71,8 @@ public class InventoryCleaner {
                 if(line.trim().isEmpty()){
                     continue;
                 }
+
+                line = line.replaceAll("(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\\s+(\\d{1,2}),\\s+(\\d{4})", "$1 $2 $3");
 
                 int commaCount = countChar(line, ',');
                 int pipeCount = countChar(line, '|');
@@ -74,16 +114,16 @@ public class InventoryCleaner {
                     }
                     String rawCategory = getField(data[5],"Category");
                     String category = rawCategory.substring(0,1).toUpperCase() + rawCategory.substring(1).toLowerCase();
-                    String dateAdded = getField(data[6], "Date added");
+                    String dateAdded = normalizeDate(getField(data[6], "Date added"));
                     String imageFile = data.length > 7 ? getField(data[7], "Image file") : "No Image";
                     Part part = new Part(partCode, name, brand, priceValue, quantity, category, dateAdded, imageFile);
-                    System.out.println("Parsed: " + part.getPartCode() + " - " + part.getName());
+                    String cleanRow = part.getPartCode() + "," + part.getName() + "," + part.getBrand() + "," + part.getPrice() + "," + part.getQuantity() + "," + part.getCategory() + "," + part.getDateAdded() + "," + part.getImageFile();
+
+                    printWriter.println(cleanRow);
 
                 }
-
-
-
             }
+            System.out.println("\n All parts written to " + outFile);
         } catch (IOException e){
             System.out.println("An error occurred while reading the file " + file);
         }
