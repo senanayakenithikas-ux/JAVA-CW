@@ -2,9 +2,7 @@ package main;
 
 import models.Part;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class InventoryManager {
@@ -119,5 +117,34 @@ public class InventoryManager {
             }
         }
         return lowStock;
+    }
+
+    public double getTotalValue() {
+        double totalValue = 0.0;
+        for (int i = 0; i < parts.size(); i++) {
+            Part part = parts.get(i);
+            totalValue += part.getPrice() * part.getQuantity();
+        }
+        return totalValue;
+    }
+
+    public ArrayList<Part> getParts() {
+        return parts;
+    }
+
+    public int getTotalCount() {
+        return parts.size();
+    }
+
+    public void saveParts() {
+        try (PrintWriter pw = new PrintWriter(new FileWriter("inventory_clean.txt"))) {
+            for (int i = 0; i < parts.size(); i++) {
+                Part p = parts.get(i);
+                pw.println(p.getPartCode() + "," + p.getName() + "," + p.getBrand() + "," + p.getPrice() + "," + p.getQuantity() + "," + p.getCategory() + "," + p.getDateAdded() + "," + p.getImageFile());
+            }
+            System.out.println("Inventory saved.");
+        } catch (IOException e) {
+            System.out.println("Error saving inventory: " + e.getMessage());
+        }
     }
 }
