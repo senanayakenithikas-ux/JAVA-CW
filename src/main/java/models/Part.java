@@ -2,6 +2,24 @@ package com.example._609835;
 
 public class Part {
     private String partCode;
+    private String name;
+    private String brand;
+    private double price;
+    private int quantity;
+    private String category;
+    private String dateAdded;
+    private String imageFile;
+
+    public Part(String partCode, String name,  String brand, double price, int quantity, String category, String dataAdded, String imageFile){
+        this.partCode = partCode;
+        this.name = name;
+        this.brand = brand;
+        this.price = price;
+        this.quantity = quantity;
+        this.category = category;
+        this.dateAdded = dataAdded;
+        this.imageFile = imageFile;
+    }
 
     public String getName() {
         return name;
@@ -27,7 +45,7 @@ public class Part {
         return category;
     }
 
-    public String getDataAdded() {
+    public String getDateAdded() {
         return dateAdded;
     }
 
@@ -67,22 +85,5 @@ public class Part {
         this.dateAdded = dataAdded;
     }
 
-    private String name;
-    private String brand;
-    private double price;
-    private int quantity;
-    private String category;
-    private String dateAdded;
-    private String imageFile;
 
-    public Part(String partCode, String name,  String brand, double price, int quantity, String category, String dataAdded, String imageFile){
-        this.partCode = partCode;
-        this.name = name;
-        this.brand = brand;
-        this.price = price;
-        this.quantity = quantity;
-        this.category = category;
-        this.dateAdded = dataAdded;
-        this.imageFile = imageFile;
-    }
 }
