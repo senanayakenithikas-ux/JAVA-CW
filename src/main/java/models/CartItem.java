@@ -1,4 +1,4 @@
-package com.example._609835;
+package models;
 
 public class CartItem {
     private Part part;

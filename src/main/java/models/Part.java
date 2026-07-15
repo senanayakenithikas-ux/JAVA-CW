@@ -1,4 +1,4 @@
-package com.example._609835;
+package models;
 
 public class Part {
     private String partCode;

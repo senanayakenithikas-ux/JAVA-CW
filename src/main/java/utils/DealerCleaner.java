@@ -1,4 +1,6 @@
-package models;
+package utils;
+
+import models.Dealer;
 
 import java.io.*;
 

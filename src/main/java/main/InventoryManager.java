@@ -44,6 +44,19 @@ public class InventoryManager {
         }
     }
 
+    public void addPart (Part part) {
+        if (part != null) {
+            for (int i = 0; i < parts.size(); i++) {
+                if (parts.get(i).getPartCode().equals(part.getPartCode())) {
+                    System.out.println("Part with code " + part.getPartCode() + " already exists!");
+                    return;
+                }
+            }
+            parts.add(part);
+            System.out.println("Part added successfully: " + part.getName());
+        }
+    }
+
 
 
 }
