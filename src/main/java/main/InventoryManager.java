@@ -6,7 +6,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.io.*;
 
 public class InventoryManager {
 
@@ -57,6 +56,68 @@ public class InventoryManager {
         }
     }
 
+    public void deletePart (String partCode) {
+        for (int i = 0; i < parts.size(); i++) {
+            if (parts.get(i).getPartCode().equalsIgnoreCase(partCode)) {
+                parts.remove(i);
+                System.out.println("Part " + partCode + " removed.");
+                return;
+            }
+        }
+        System.out.println("Part " + partCode + " not found.");
 
+    }
 
+    public void updatePart (String partCode, String newName, String newBrand, double newPrice, int newQuantity, String newCategory, String newDateAdded, String newImageFile) {
+        for (int i =0; i < parts.size(); i++) {
+            Part part = parts.get(i);
+            if (part.getPartCode().equalsIgnoreCase(partCode)) {
+                part.setName(newName);
+                part.setBrand(newBrand);
+                part.setPrice(newPrice);
+                part.setQuantity(newQuantity);
+                part.setCategory(newCategory);
+                part.setDateAdded(newDateAdded);
+                part.setImageFile(newImageFile);
+                return;
+            }
+        }
+        System.out.println("Part " + partCode + " updated successfully.");
+        return;
+    }
+
+    public void sortParts() {
+        int n = parts.size();
+        for (int i =0; i < n-1; i++) {
+            for (int j =0; j < n-i-1; j++) {
+                Part p1 = parts.get(j);
+                Part p2 = parts.get(j+1);
+
+                int compCat = p1.getCategory().compareTo(p2.getCategory());
+                boolean swap = false;
+                if (compCat > 0) {
+                    swap = true;
+                } else if (compCat == 0) {
+                    if (p1.getPartCode().compareTo(p2.getPartCode()) > 0) {
+                        swap = true;
+                    }
+                }
+                if (swap) {
+                    parts.set(j, p2);
+                    parts.set(j + 1, p1);
+                }
+            }
+        }
+    }
+
+    public ArrayList<Part> getLowStockParts() {
+        ArrayList<Part> lowStock = new ArrayList<Part>();
+        int lowStockThreshold = 5;
+        for (int i =0; i < parts.size(); i++){
+            if (parts.get(i).getQuantity() < lowStockThreshold){
+                lowStock.add(parts.get(i));
+            }
+        }
+        return lowStock;
+    }
 }
