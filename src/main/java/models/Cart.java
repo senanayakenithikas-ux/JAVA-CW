@@ -78,5 +78,31 @@ public class Cart {
         return baseLineTotal;
     }
 
+    public String checkOut() {
+        if (cartItems.isEmpty()) {
+            return "Error: Cannot checkout an empty cart.";
+        }
+
+        for (int i = 0; i < cartItems.size(); i++) {
+            CartItem item = cartItems.get(i);
+            Part realPart = item.getPart();
+            int remainingStock = realPart.getQuantity() - item.getQuantity();
+            realPart.setQuantity(remainingStock);
+
+            AuditLogger.log("CHECKOUT", realPart.getPartCode(), item.getQuantity());
+        }
+        inventoryManager.saveParts();
+        clearCart();
+        return "Checkout finalized. Inventory updated and logged successfully.";
+    }
+
+    public ArrayList<CartItem> getCartItems() {
+        return cartItems;
+    }
+
+    public void clearCart() {
+        cartItems.clear();
+
+    }
 
 }
