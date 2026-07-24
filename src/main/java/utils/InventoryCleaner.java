@@ -58,8 +58,8 @@ public class InventoryCleaner {
     }
 
     public static void main (String[] args){
-        String file = "inventory_legacy.txt";
-        String outFile = "inventory_clean.txt";
+        String file = ".data/inventory_legacy.txt";
+        String outFile = ".data/inventory_clean.txt";
 
 
         try (FileReader filereader = new FileReader(file);
@@ -118,8 +118,8 @@ public class InventoryCleaner {
                     String category = rawCategory.substring(0,1).toUpperCase() + rawCategory.substring(1).toLowerCase();
                     String dateAdded = normalizeDate(getField(data[6], "Date added"));
                     String imageFile = data.length > 7 ? getField(data[7], "Image file") : "No Image";
-                    Part part = new Part(partCode, name, brand, priceValue, quantity, category, dateAdded, imageFile);
-                    String cleanRow = part.getPartCode() + "," + part.getName() + "," + part.getBrand() + "," + part.getPrice() + "," + part.getQuantity() + "," + part.getCategory() + "," + part.getDateAdded() + "," + part.getImageFile();
+                    Part part = new Part(partCode, name, brand, priceValue, quantity, category, dateAdded, imageFile,10);
+                    String cleanRow = part.getPartCode() + "," + part.getName() + "," + part.getBrand() + "," + part.getPrice() + "," + part.getQuantity() + "," + part.getCategory() + "," + part.getDateAdded() + "," + part.getImageFile() + "," + part.getThreshold();
 
                     printWriter.println(cleanRow);
 

@@ -9,8 +9,9 @@ public class Part {
     private String category;
     private String dateAdded;
     private String imageFile;
+    private int threshold;
 
-    public Part(String partCode, String name,  String brand, double price, int quantity, String category, String dataAdded, String imageFile){
+    public Part(String partCode, String name,  String brand, double price, int quantity, String category, String dataAdded, String imageFile, int threshold){
         this.partCode = partCode;
         this.name = name;
         this.brand = brand;
@@ -19,6 +20,7 @@ public class Part {
         this.category = category;
         this.dateAdded = dataAdded;
         this.imageFile = imageFile;
+        this.threshold = threshold;
     }
 
     public String getName() {
@@ -81,9 +83,18 @@ public class Part {
         this.imageFile = imageFile;
     }
 
-    public void setDataAdded(String dataAdded) {
+    public void setDateAdded(String dataAdded) {
         this.dateAdded = dataAdded;
     }
+
+    public int getThreshold() {
+        return threshold;
+    }
+
+    public void setThreshold(int threshold) {
+        this.threshold = threshold;
+    }
+
 
 
 }

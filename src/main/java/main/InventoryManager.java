@@ -22,7 +22,7 @@ public class InventoryManager {
                 }
 
                 String [] data = line.split(",");
-                if (data.length == 8) {
+                if (data.length == 9) {
                     String partCode = data[0].trim();
                     String name = data[1].trim();
                     String brand = data[2].trim();
@@ -31,8 +31,9 @@ public class InventoryManager {
                     String category = data[5].trim();
                     String dateAdded = data[6].trim();
                     String imageFile = data[7].trim();
+                    int threshold = Integer.parseInt(data[8].trim());
 
-                    parts.add(new Part(partCode, name, brand, price, quantity, category, dateAdded, imageFile));
+                    parts.add(new Part(partCode, name, brand, price, quantity, category, dateAdded, imageFile, threshold));
                 }
             }
 
@@ -110,9 +111,9 @@ public class InventoryManager {
 
     public ArrayList<Part> getLowStockParts() {
         ArrayList<Part> lowStock = new ArrayList<Part>();
-        int lowStockThreshold = 5;
+
         for (int i =0; i < parts.size(); i++){
-            if (parts.get(i).getQuantity() < lowStockThreshold){
+            if (parts.get(i).getQuantity() <= parts.get(i).getThreshold()){
                 lowStock.add(parts.get(i));
             }
         }
@@ -140,7 +141,7 @@ public class InventoryManager {
         try (PrintWriter pw = new PrintWriter(new FileWriter("inventory_clean.txt"))) {
             for (int i = 0; i < parts.size(); i++) {
                 Part p = parts.get(i);
-                pw.println(p.getPartCode() + "," + p.getName() + "," + p.getBrand() + "," + p.getPrice() + "," + p.getQuantity() + "," + p.getCategory() + "," + p.getDateAdded() + "," + p.getImageFile());
+                pw.println(p.getPartCode() + "," + p.getName() + "," + p.getBrand() + "," + p.getPrice() + "," + p.getQuantity() + "," + p.getCategory() + "," + p.getDateAdded() + "," + p.getImageFile() + "," + p.getThreshold());
             }
             System.out.println("Inventory saved.");
         } catch (IOException e) {

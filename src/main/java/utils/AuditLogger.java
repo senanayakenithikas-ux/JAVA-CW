@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 
 public class AuditLogger {
 
-    private static final String logFile = "Audit_log.txt";
+    private static final String logFile = "audit_log.txt";
 
     public static void log (String  action, String itemCode, int quantity) {
         LocalDateTime now = LocalDateTime.now();
