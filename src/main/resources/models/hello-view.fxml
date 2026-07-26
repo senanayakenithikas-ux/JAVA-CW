@@ -1,16 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example._609835.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<AnchorPane prefHeight="500.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.HomeController">
+   <children>
+      <VBox alignment="CENTER" spacing="12.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <padding>
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+         </padding>
+         <children>
+            <Label text="Malabe Tuk-Tuk &amp; Three-wheeler Spares Depot" textAlignment="CENTER">
+               <font>
+                  <Font name="Georgia" size="22.0" />
+               </font>
+            </Label>
+            <Label text="Select an option to continue" textFill="#555555">
+               <font>
+                  <Font name="Georgia Italic" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="15.0" />
+               </VBox.margin>
+            </Label>
+            <Button fx:id="btnInventory" minWidth="180.0" onAction="#handleInventory" text="Inventory Management" />
+            <Button fx:id="btnDealers" minWidth="180.0" onAction="#handleDealers" text="Dealer Management" />
+            <Button fx:id="btnLowStock" minWidth="180.0" onAction="#handleLowStock" text="Low Stock Monitor" />
+            <Button fx:id="btnSearch" minWidth="180.0" onAction="#handleSearch" text="Search Parts" />
+            <Button fx:id="btnCart" minWidth="180.0" onAction="#handleCart" text="Cart" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
