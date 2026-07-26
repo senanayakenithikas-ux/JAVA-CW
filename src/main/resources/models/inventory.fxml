@@ -64,6 +64,11 @@
                                     </font>
                                 </Label>
                                 <Label fx:id="totalValueLabel" text="0.00" />
+                                <Label text="Low Stock Threshold:" />
+                                <TextField fx:id="txtLowStockThreshold" promptText="Enter threshold" prefWidth="100" />
+                                <Label text="Low Stock Items:" />
+                                <Label fx:id="lowStockCountLabel" text="0" />
+                                <Button text="Check" onAction="#handleCheckLowStock" />
                             </children>
                         </VBox>
                     </children>

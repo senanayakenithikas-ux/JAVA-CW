@@ -235,4 +235,23 @@ public class InventoryController {
             loadImage(file.getName());
         }
     }
+
+    @FXML private TextField txtLowStockThreshold;
+    @FXML private Label lowStockCountLabel;
+
+    @FXML
+    private void handleCheckLowStock() {
+        try {
+            int threshold = Integer.parseInt(txtLowStockThreshold.getText().trim());
+            int count = 0;
+            for (int i = 0; i < inventoryManager.getParts().size(); i++) {
+                if (inventoryManager.getParts().get(i).getQuantity() < threshold) {
+                    count++;
+                }
+            }
+            lowStockCountLabel.setText(String.valueOf(count));
+        } catch (NumberFormatException e) {
+            showAlert("Error", "Please enter a valid number!");
+        }
+    }
 }
