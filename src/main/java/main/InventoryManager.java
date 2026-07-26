@@ -11,7 +11,7 @@ public class InventoryManager {
 
     public void loadParts() {
 
-        String fileName = "inventory_clean.txt";
+        String fileName = ".data/inventory_clean.txt";
         parts.clear();
 
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
@@ -42,17 +42,18 @@ public class InventoryManager {
         }
     }
 
-    public void addPart (Part part) {
+    public boolean addPart (Part part) {
         if (part != null) {
             for (int i = 0; i < parts.size(); i++) {
                 if (parts.get(i).getPartCode().equals(part.getPartCode())) {
                     System.out.println("Part with code " + part.getPartCode() + " already exists!");
-                    return;
+                    return false;
                 }
             }
             parts.add(part);
             System.out.println("Part added successfully: " + part.getName());
         }
+        return false;
     }
 
     public void deletePart (String partCode) {
@@ -138,7 +139,7 @@ public class InventoryManager {
     }
 
     public void saveParts() {
-        try (PrintWriter pw = new PrintWriter(new FileWriter("inventory_clean.txt"))) {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(".data/inventory_clean.txt"))) {
             for (int i = 0; i < parts.size(); i++) {
                 Part p = parts.get(i);
                 pw.println(p.getPartCode() + "," + p.getName() + "," + p.getBrand() + "," + p.getPrice() + "," + p.getQuantity() + "," + p.getCategory() + "," + p.getDateAdded() + "," + p.getImageFile() + "," + p.getThreshold());
