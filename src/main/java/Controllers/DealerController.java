@@ -23,6 +23,8 @@ public class DealerController {
     public void initialize() {
         dealerManager.loadDealers();
         setupColumns();
+        dealersTable.getItems().clear();
+        dealersTable.getItems().addAll(dealerManager.getDealers());
     }
 
     private void setupColumns() {
