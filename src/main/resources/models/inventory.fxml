@@ -28,7 +28,6 @@
                             <font>
                                 <Font name="System Bold" size="20.0" />
                             </font>
-                            <Button mnemonicParsing="false" onAction="#handleRefresh" text="Refresh" />
                         </Label>
                     </children>
                 </HBox>
@@ -65,11 +64,8 @@
                                     </font>
                                 </Label>
                                 <Label fx:id="totalValueLabel" text="0.00" />
-                                <Label text="Low Stock Threshold:" />
-                                <TextField fx:id="txtLowStockThreshold" promptText="Enter threshold" prefWidth="100" />
-                                <Label text="Low Stock Items:" />
-                                <Label fx:id="lowStockCountLabel" text="0" />
-                                <Button text="Check" onAction="#handleCheckLowStock" />
+
+
                             </children>
                         </VBox>
                     </children>

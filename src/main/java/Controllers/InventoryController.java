@@ -11,6 +11,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.InventoryManager;
 import models.Part;
+import utils.AuditLogger;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -142,11 +144,10 @@ public class InventoryController {
             String imageFile = txtImage.getText().trim().isEmpty() ? "No Image" : txtImage.getText().trim();
             String dateAdded = txtDate.getText().trim();
             Part part = new Part(partCode, name, brand, price, quantity, category, dateAdded, imageFile, threshold);
-            inventoryManager.addPart(part);
-            inventoryManager.saveParts();
             boolean added = inventoryManager.addPart(part);
             if (added) {
                 inventoryManager.saveParts();
+                AuditLogger.log("ADD", partCode, quantity);
                 loadTable();
                 handleClear();
                 showAlert("Success", "Part added successfully!");}
@@ -165,6 +166,7 @@ public class InventoryController {
         }
         inventoryManager.deletePart(selected.getPartCode());
         inventoryManager.saveParts();
+        AuditLogger.log("DELETE", selected.getPartCode(), selected.getQuantity());
         loadTable();
         showAlert("Success", "Part deleted successfully!");
     }
@@ -184,6 +186,7 @@ public class InventoryController {
             String dateAdded = txtDate.getText().trim();
             inventoryManager.updatePart(partCode, name, brand, price, quantity, category, dateAdded,imageFile,threshold);
             inventoryManager.saveParts();
+            AuditLogger.log("UPDATE", partCode, quantity);
             loadTable();
             handleClear();
             showAlert("Success", "Part updated successfully!");
@@ -236,14 +239,8 @@ public class InventoryController {
         }
     }
 
-    @FXML private TextField txtLowStockThreshold;
-    @FXML private Label lowStockCountLabel;
 
-    @FXML
-    private void handleCheckLowStock() {
-        int count = inventoryManager.getLowStockParts().size();
-        lowStockCountLabel.setText(String.valueOf(count));
-    }
+
 
     @FXML
     private void handleRefresh() {
