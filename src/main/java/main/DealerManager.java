@@ -14,7 +14,7 @@ public class DealerManager {
 
     public void loadDealers () {
 
-        String fileName = "dealers_clean.txt";
+        String fileName = ".data/dealers_clean.txt";
         dealers.clear();
 
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))){

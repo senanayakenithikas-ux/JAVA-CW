@@ -68,7 +68,7 @@ public class InventoryManager {
 
     }
 
-    public void updatePart (String partCode, String newName, String newBrand, double newPrice, int newQuantity, String newCategory, String newDateAdded, String newImageFile) {
+    public void updatePart (String partCode, String newName, String newBrand, double newPrice, int newQuantity, String newCategory, String newDateAdded, String newImageFile, int newThreshold) {
         for (int i =0; i < parts.size(); i++) {
             Part part = parts.get(i);
             if (part.getPartCode().equalsIgnoreCase(partCode)) {
@@ -79,6 +79,7 @@ public class InventoryManager {
                 part.setCategory(newCategory);
                 part.setDateAdded(newDateAdded);
                 part.setImageFile(newImageFile);
+                part.setThreshold(newThreshold);
                 return;
             }
         }
@@ -93,12 +94,12 @@ public class InventoryManager {
                 Part p1 = parts.get(j);
                 Part p2 = parts.get(j+1);
 
-                int compCat = p1.getCategory().compareTo(p2.getCategory());
+                int compCat = p1.getCategory().compareToIgnoreCase(p2.getCategory());
                 boolean swap = false;
                 if (compCat > 0) {
                     swap = true;
                 } else if (compCat == 0) {
-                    if (p1.getPartCode().compareTo(p2.getPartCode()) > 0) {
+                    if (p1.getPartCode().compareToIgnoreCase(p2.getPartCode()) > 0) {
                         swap = true;
                     }
                 }

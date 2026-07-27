@@ -1,6 +1,8 @@
-package models;
+package main;
 
-import main.InventoryManager;
+import models.CartItem;
+import models.Part;
+import utils.AuditLogger;
 
 import java.util.ArrayList;
 
