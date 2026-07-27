@@ -20,9 +20,6 @@
                 <HBox alignment="CENTER_LEFT" spacing="15.0">
                     <children>
                         <Button mnemonicParsing="false" onAction="#handleBack" text="← Back" />
-                        <Label text="Low Stock Threshold:" />
-                        <TextField fx:id="txtThreshold" promptText="Enter threshold" prefWidth="100" />
-                        <Button mnemonicParsing="false" onAction="#handleUpdateThreshold" text="Update Threshold" />
                         <Label text="Items below threshold:" />
                         <Label fx:id="lowStockCountLabel" text="0" />
                     </children>

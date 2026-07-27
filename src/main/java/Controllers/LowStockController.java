@@ -17,7 +17,6 @@ public class LowStockController {
     @FXML private TableColumn<Part, String> colName;
     @FXML private TableColumn<Part, Integer> colQty;
     @FXML private TableColumn<Part, Integer> colThreshold;
-    @FXML private TextField txtThreshold;
     @FXML private Label lowStockCountLabel;
 
     private InventoryManager inventoryManager = new InventoryManager();
@@ -25,7 +24,6 @@ public class LowStockController {
     public void initialize() {
         inventoryManager.loadParts();
         setupColumns();
-        txtThreshold.setText("10");
         loadLowStockTable();
     }
 
@@ -56,20 +54,6 @@ public class LowStockController {
         stage.setScene(scene);
     }
 
-    @FXML
-    private void handleUpdateThreshold() {
-        try {
-            int newThreshold = Integer.parseInt(txtThreshold.getText().trim());
-            // update threshold for all parts
-            for (int i = 0; i < inventoryManager.getParts().size(); i++) {
-                inventoryManager.getParts().get(i).setThreshold(newThreshold);
-            }
-            inventoryManager.saveParts();
-            loadLowStockTable();
-        } catch (NumberFormatException e) {
-            showAlert("Error", "Please enter a valid number!");
-        }
-    }
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
