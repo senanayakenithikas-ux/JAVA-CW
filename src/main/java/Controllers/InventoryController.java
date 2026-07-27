@@ -182,7 +182,7 @@ public class InventoryController {
 
             String imageFile = txtImage.getText().trim().isEmpty() ? "No Image" : txtImage.getText().trim();
             String dateAdded = txtDate.getText().trim();
-            inventoryManager.updatePart(partCode, name, brand, price, quantity, category, dateAdded,imageFile);
+            inventoryManager.updatePart(partCode, name, brand, price, quantity, category, dateAdded,imageFile,threshold);
             inventoryManager.saveParts();
             loadTable();
             handleClear();
@@ -241,17 +241,13 @@ public class InventoryController {
 
     @FXML
     private void handleCheckLowStock() {
-        try {
-            int threshold = Integer.parseInt(txtLowStockThreshold.getText().trim());
-            int count = 0;
-            for (int i = 0; i < inventoryManager.getParts().size(); i++) {
-                if (inventoryManager.getParts().get(i).getQuantity() < threshold) {
-                    count++;
-                }
-            }
-            lowStockCountLabel.setText(String.valueOf(count));
-        } catch (NumberFormatException e) {
-            showAlert("Error", "Please enter a valid number!");
-        }
+        int count = inventoryManager.getLowStockParts().size();
+        lowStockCountLabel.setText(String.valueOf(count));
+    }
+
+    @FXML
+    private void handleRefresh() {
+        inventoryManager.loadParts();
+        loadTable();
     }
 }

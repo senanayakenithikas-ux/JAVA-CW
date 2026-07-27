@@ -28,6 +28,7 @@
                             <font>
                                 <Font name="System Bold" size="20.0" />
                             </font>
+                            <Button mnemonicParsing="false" onAction="#handleRefresh" text="Refresh" />
                         </Label>
                     </children>
                 </HBox>
@@ -93,6 +94,7 @@
                 
                 <HBox alignment="CENTER" spacing="10.0">
                     <children>
+                        <Button mnemonicParsing="false" onAction="#handleRefresh" text="Refresh" />
                         <Button onAction="#handleAdd" text="Add Part" />
                         <Button onAction="#handleUpdate" text="Update Part" />
                         <Button onAction="#handleDelete" text="Delete Part" />
