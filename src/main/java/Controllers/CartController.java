@@ -45,11 +45,9 @@ public class CartController {
         colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         colStock.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 
-        colCartName.setCellValueFactory(data ->
-                new javafx.beans.property.SimpleStringProperty(
-                        data.getValue().getPart().getName()
-                )
-        );
+        colCartName.setCellValueFactory(new PropertyValueFactory<>("partName"));
+        colCartPrice.setCellValueFactory(new PropertyValueFactory<>("subtotal"));
+
         colCartQty.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         colCartPrice.setCellValueFactory(data ->
                 new javafx.beans.property.SimpleDoubleProperty(

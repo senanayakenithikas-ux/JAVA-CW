@@ -24,5 +24,13 @@ public class CartItem {
         this.quantity = quantity;
     }
 
+    public String getPartName(){
+        return part.getName();
+    }
+
+    public double getSubTotal(){
+        return part.getPrice() * quantity;
+    }
+
 
 }
