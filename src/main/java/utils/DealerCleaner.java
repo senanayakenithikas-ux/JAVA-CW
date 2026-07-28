@@ -26,7 +26,7 @@ public class DealerCleaner {
 
     public static void main(String[] args){
         String file = ".data/dealers_legacy.txt";
-        String outFile = " .data/dealers_clean.txt";
+        String outFile = ".data/dealers_clean.txt";
 
         try (FileReader filereader  = new FileReader(file);
              BufferedReader bufferedReader = new BufferedReader(filereader);
