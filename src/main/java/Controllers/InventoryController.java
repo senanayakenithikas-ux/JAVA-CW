@@ -1,5 +1,7 @@
 package Controllers;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -73,14 +75,16 @@ public class InventoryController {
     }
 
     private void setupSelectionListener() {
-        inventoryTable.getSelectionModel().selectedItemProperty().addListener(
-                (obs, oldVal, newVal) -> {
-                    if (newVal != null) {
-                        fillForm(newVal);
-                        loadImage(newVal.getImageFile());
+        inventoryTable.getSelectionModel().selectedItemProperty()
+                .addListener(new ChangeListener<Part>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Part> obs, Part oldVal, Part newVal) {
+                        if (newVal != null) {
+                            fillForm(newVal);
+                            loadImage(newVal.getImageFile());
+                        }
                     }
-                }
-        );
+                });
     }
 
     private void fillForm(Part part) {

@@ -74,8 +74,6 @@ public class DealerCleaner {
             System.out.println("\n All dealers written to " + outFile);
         } catch (IOException e){
             System.out.println("An error occurred while reading the file " + file);
-
-
     }
     }
 }

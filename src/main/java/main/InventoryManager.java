@@ -52,6 +52,7 @@ public class InventoryManager {
             }
             parts.add(part);
             System.out.println("Part added successfully: " + part.getName());
+            return true;
         }
         return false;
     }

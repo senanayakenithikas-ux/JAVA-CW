@@ -49,7 +49,6 @@ public class DealerManager {
         if (dealers.size() < 4) {
             return "Error: Not enough dealers in the list to pick 4 unique ones.";
         }
-
         Random rand = new Random();
         ArrayList<Integer> pickedIndexes = new ArrayList<Integer>();
 

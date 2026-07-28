@@ -26,31 +26,24 @@ public class Part {
     public String getName() {
         return name;
     }
-
     public String getPartCode() {
         return partCode;
     }
-
     public String getBrand() {
         return brand;
     }
-
     public double getPrice() {
         return price;
     }
-
     public int getQuantity() {
         return quantity;
     }
-
     public String getCategory() {
         return category;
     }
-
     public String getDateAdded() {
         return dateAdded;
     }
-
     public String getImageFile() {
         return imageFile;
     }
@@ -58,43 +51,31 @@ public class Part {
     public void setPartCode(String partCode) {
         this.partCode = partCode;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
     public void setBrand(String brand) {
         this.brand = brand;
     }
-
     public void setPrice(double price) {
         this.price = price;
     }
-
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-
     public void setCategory(String category) {
         this.category = category;
     }
-
     public void setImageFile(String imageFile) {
         this.imageFile = imageFile;
     }
-
     public void setDateAdded(String dataAdded) {
         this.dateAdded = dataAdded;
     }
-
     public int getThreshold() {
         return threshold;
     }
-
     public void setThreshold(int threshold) {
         this.threshold = threshold;
     }
-
-
-
 }

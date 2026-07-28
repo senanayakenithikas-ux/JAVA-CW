@@ -58,6 +58,4 @@ public class HomeController {
         Stage stage = (Stage) btnLowStock.getScene().getWindow();
         stage.setScene(scene);
     }
-
-
 }
